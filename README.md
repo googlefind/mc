@@ -46,7 +46,11 @@
   </style>
 </head>
 <body>
-  <h1>8051 Assembly & C Programs</h1>
+  <h1>
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
+     alt="Google Logo" 
+     width="150">
+</h1>
   <input type="text" id="search" placeholder="Search Program (e.g., 12b or factorial)">
   <div id="programs"></div>
 
