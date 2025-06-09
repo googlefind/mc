@@ -37,7 +37,7 @@
       word-wrap: break-word;
     }
     input[type="text"] {
-      width: 100%;
+      width: 50%;
       padding: 10px;
       margin-bottom: 20px;
       font-size: 16px;
