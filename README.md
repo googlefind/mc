@@ -15,8 +15,7 @@
     }
     .program {
       background: white;
-      border: 1px solid #ccc;
-      padding: 15px;
+       padding: 15px;
       margin-bottom: 20px;
       border-radius: 8px;
       position: relative;
@@ -49,7 +48,7 @@
   <h1>
     <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" 
      alt="Google Logo" 
-     width="150">
+     width="600">
 </h1>
   <input type="text" id="search" placeholder="Search Program (e.g., 12b or factorial)">
   <div id="programs"></div>
