@@ -7,7 +7,7 @@
     body {
       font-family: Arial, sans-serif;
       padding: 20px;
-      background: #f9f9f9;
+      background: #ffffff;
       color: #333;
     }
     h1 {
