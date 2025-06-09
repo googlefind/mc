@@ -14,7 +14,7 @@
       text-align: center;
     }
     .program {
-      background: #fff;
+      background: white;
       border: 1px solid #ccc;
       padding: 15px;
       margin-bottom: 20px;
