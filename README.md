@@ -38,8 +38,9 @@
     }
     input[type="text"] {
       width: 50%;
-      padding: 50px;
+      padding: 10px;
       margin-bottom: 20px;
+      margin-right:50px;
       font-size: 16px;
     }
   </style>
