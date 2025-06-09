@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -21,6 +20,7 @@
       margin-bottom: 20px;
       border-radius: 8px;
       position: relative;
+      text-color:black;
     }
     button.copy {
       position: absolute;
