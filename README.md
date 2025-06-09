@@ -20,7 +20,7 @@
       margin-bottom: 20px;
       border-radius: 8px;
       position: relative;
-      color:black;
+      color:white;
     }
     button.copy {
       position: absolute;
