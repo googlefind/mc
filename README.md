@@ -38,7 +38,7 @@
     }
     input[type="text"] {
       width: 50%;
-      padding: 10px;
+      padding: 50px;
       margin-bottom: 20px;
       font-size: 16px;
     }
