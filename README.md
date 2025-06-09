@@ -1,176 +1,113 @@
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8051 Microcontroller Program Repository</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-        
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .program-card {
-            background: white;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .program-header {
-            background-color: #3498db;
-            color: white;
-            padding: 10px 15px;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .program-content {
-            padding: 15px;
-            display: none;
-        }
-        
-        pre {
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-radius: 4px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-        }
-        
-        .copy-btn {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-        
-        .copy-btn:hover {
-            background-color: #2ecc71;
-        }
-        
-        .search-box {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .category-filter {
-            margin-bottom: 20px;
-        }
-        
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #2c3e50;
-            color: white;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>8051 Programs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f9f9f9;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+    }
+    .program {
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      position: relative;
+    }
+    button.copy {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    pre {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>8051 Microcontroller Program Repository</h1>
-        <p>A collection of useful 8051 assembly and C programs</p>
-    </header>
-    
-    <div class="container">
-        <input type="text" class="search-box" placeholder="Search programs...">
-        
-        <div class="category-filter">
-            <select>
-                <option>All Categories</option>
-                <option>Memory Operations</option>
-                <option>Mathematical Operations</option>
-                <option>Sorting Algorithms</option>
-                <option>I/O Operations</option>
-                <option>Wave Generation</option>
-                <option>Motor Control</option>
-            </select>
-        </div>
-        
-        <!-- Program 1 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>1. Memory Block Transfer</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Transfers a block of data from internal memory location 20H to 40H</p>
-                <pre id="program1">
-Org 0000h 
-MOV R2, #0AH 
+  <h1>8051 Assembly & C Programs</h1>
+  <input type="text" id="search" placeholder="Search Program (e.g., 12b or factorial)">
+  <div id="programs"></div>
+
+  <script>
+    const programs = `
+1)
+ORG 0000h
+MOV R2, #0AH
+MOV R0, #20H
+MOV R1, #40H
+BACK: MOV A, @R0
+MOV @R1, A
+INC R0
+DJNZ R2, BACK
+NOP
+END
+
+2)
+ORG 0000h
+MOV DPTR, #2000H
+MOV R0, #20H
+MOV R1, #0AH
+BACK: MOVX A, @DPTR
+MOV @R0, A
+INC DPTR
+INC R0
+DJNZ R1
+NOP
+END
+
+3)
+Org 0000H ;
+MOV R2, #05H ;
 MOV R0, #20H ;
 MOV R1, #40H ;
-BACK: MOV A, @R0 ;
-MOV @R1, A ;
-INC R0 ;
-DJNZ R2, BACK ; 
-NOP
-END</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program1')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 2 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>2. External to Internal Memory Transfer</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Transfers data from external memory (starting at 2000H) to internal memory (starting at 20H)</p>
-                <pre id="program2">
-Org 0000h ;
-MOV DPTR, #2000H ;
-MOV R0, #20H ; 
-MOV R1, #0AH ;
-BACK: MOVX A, @DPTR ;
+AGAIN: MOV A, @R0
+XCH A, @R1 ;.
 MOV @R0, A ;
-INC DPTR ;
 INC R0 ;
-DJNZ R1,
-NOP 
-END</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program2')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 5 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>5. Addition with Carry Handling</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Adds two numbers from memory locations 34H and 35H, stores result in R5, handles carry</p>
-                <pre id="program5">
+INC R1 ;
+DJNZ R2, AGAIN ;
+STOP: SJMP STOP
+END
+
+4)
+Org 0000H ;n
+MOV R2, #06H ;
+MOV R0, #10H ;
+MOV DPTR, #00H ;
+AGAIN: MOVX A, @DPTR ;
+MOV B , @R0 ;
+XCH A,B ;
+MOV X @DPTR,A ;
+MOV @R0,B ;
+INC R0 ;.
+INC DPTR ;
+DJNZ R2, AGAIN ;
+STOP: SJMP STOP
+END
+
+5)
 Org 0000h
 MOV A,34H ;
 ADD A,35H ;
@@ -178,20 +115,19 @@ MOV R5H,A ;
 JNC LAST ;
 INC R6
 LAST: NOP
-END</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program5')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 7 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>7. Multiplication</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Multiplies two numbers from 30H and 31H, stores 16-bit result in 32H (LSB) and 33H (MSB)</p>
-                <pre id="program7">
+END
+
+6)
+Org 0000h
+MOV A,34H ;
+SUBB A,35H ;
+MOV R5H,A ;
+JNC LAST
+DEC R6
+LAST: NOP
+END
+
+7)
 Org 0000h
 MOV A,30H 
 MOV B,31H ;
@@ -199,20 +135,59 @@ MUL AB ;
 MOV 32H,A ;
 MOV 33H,B ;
 NOP
-END</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program7')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 11a -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>11a. Bubble Sort (Ascending Order)</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Sorts 6 numbers in ascending order stored in internal memory starting at 20H</p>
-                <pre id="program11a">
+END
+
+8)
+Org 0000h ;
+MOV A,30H
+DIV AB ; 
+MOV 32H,A ; 
+MOV 33H,B ; 
+NOP
+END
+
+9)
+ORG 0000H
+MOV DPTR,#1000H ;
+MOV R0,#20H 
+MOV R1,#30H ;
+MOV R2,#08H ;
+UP: MOVX A,@DPTR ;
+MOV B,A ;
+RLC A ;
+JC NEG ;
+MOV @R0,B ;
+INC R0 
+JMP LAST
+NEG:MOV @R1,B 
+INC R1 ;
+LAST: INC DPTR 
+DJNZ R2,UP ;
+NOP
+END
+
+10)
+ORG 0000H
+MOV DPTR,#1000H ;
+MOV R0,#20H 
+MOV R1,#30H ;
+MOV R2,#08H ;
+UP: MOVX A,@DPTR ;
+MOV B,A ;
+RRC A ;
+JC ODD ;
+MOV @R0,B ;
+INC R0 
+JMP LAST
+ODD:MOV @R1,B 
+INC R1 ;
+LAST: INC DPTR 
+DJNZ R2,UP ;
+NOP
+END
+
+
+11a)
 ORG 0000H 
 MOV R3,#06H 
 EXTERNALLOOP: MOV R0,#20H ;
@@ -224,23 +199,58 @@ CJNE A,B,CONTINUE ;
 CONTINUE: JC ORDER ;
 MOV @R1,A 
 MOV @R0,B
-ORDER: INC R0 ;
+ORDER: INC R0 ;r
 INC R1 ;
 DJNZ R2,INNERLOOP ;
-DJNZ R3,EXTERNALLOOP</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program11a')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 13 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>13. LED Counter (Incrementing)</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Counts up on Port 0 LEDs with delay between increments</p>
-                <pre id="program13">
+DJNZ R3,EXTERNALLOOP
+
+11b)
+ORG 0000H ;
+MOV R3,#06H 
+EXTERNALLOOP: MOV R0,#20H ;
+MOV R1,#21H ;
+MOV R2,#06H 
+INNERLOOP: MOV A,@R0
+MOV B,@R1 ;
+CJNE A,B,CONTINUE 
+CONTINUE: JNC ORDER 
+MOV @R1,A ;
+MOV @R0,B
+ORDER: INC R0 
+DJNZ R2,INNERLOOP
+
+
+12a)
+ORG 0000H ;
+MOV R2,#05H ;
+MOV R0,#20H ;
+MOV A,@R0 ;
+UP:INC R0 ;
+MOV B,@R0
+CJNE A,B,CONT ;
+CONT: JNC LARGEST ;
+MOV A,B ;
+LARGEST:DJNZ R2,UP ;
+MOV 40H,A ;
+NOP
+END
+
+12b)
+ORG 0000H ;
+MOV R2,#05H ;
+MOV R0,#20H ;
+MOV A,@R0 ;
+UP:INC R0 ;
+MOV B,@R0
+CJNE A,B,CONT ;
+CONT: JC SMALLEST ;
+MOV A,B ;
+SMALLEST:DJNZ R2,UP ;
+MOV 40H,A ;
+NOP
+END
+
+13
 ORG 0000H
 MOV A,#00H
 BACK:MOV P0,A
@@ -255,22 +265,66 @@ UP1:DJNZ R2,UP1
 DJNZ R1,UP2
 DJNZ R0,UP3
 RET
-END</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program13')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 17 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>17. Sum of First 10 Numbers (C)</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>C program to calculate sum of first 10 natural numbers and display on P0</p>
-                <pre id="program17">
-#INCLUDE &lt;REG51.H&gt; 
-VOID MAIN()
+END
+
+14
+ORG 0000H
+MOV A,#0FFH
+BACK:MOV P0,A
+DEC A
+CALL DELAY
+JMP BACK
+DELAY:NOP
+MOV R0,#0AAH
+UP3:MOV R1,#0FFH
+UP2:MOV R2,#0FFH
+UP1:DJNZ R2,UP1
+DJNZ R1,UP2
+DJNZ R0,UP3
+RET
+END
+
+
+15
+
+ORG 0000H
+BEGIN:MOV A,#00H
+BACK:MOV P0,A
+INC A
+CALL DELAY
+CJNE A,#0AH ,BACK
+JMP BEGIN
+DELAY:NOP
+MOV R0,#0AAH
+UP3:MOV R1,#0FFH
+UP2:MOV R2,#0FFH
+UP1:DJNZ R2,UP1
+DJNZ R1,UP2
+DJNZ R0,UP3
+RET
+END
+
+16
+
+ORG 0000H
+BEGIN:MOV A,#09H
+BACK:MOV P0,A
+CALL DELAY
+DEC A
+CJNE A,#0FFH,BACK
+JMP BEGIN
+DELAY:NOP
+MOV R0,#0AAH
+UP3 :MOV R1,#0FFH
+UP2:MOV R2,#0FFH
+UP1:DJNZ R2,UP1
+DJNZ R1,UP2
+DJNZ R0,UP3
+RET
+END
+
+17)
+#INCLUDE <REG51.H> VOID MAIN()
 {
 int i, sum;
 sum = 0;
@@ -279,21 +333,72 @@ for (i = 1; i <= 10; i++)
 sum += i;
 }
 P0=SUM;
-}</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program17')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 21 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>21. Sine Wave Generation</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Generates sine wave using lookup table output on Port 0</p>
-                <pre id="program21">
-#include&lt;reg51.h&gt;
+}
+
+18)
+#include <reg51.h>
+ unsigned int FACTORIAL(unsigned int N)
+{
+unsigned int I ,RESULT = 1;
+ for (I = 1; I <= N; I++)
+  {
+RESULT = RESULT * I;
+}
+return RESULT;
+}
+void  main()
+{
+unsigned int N = 5; 
+
+ unsigned int RESULT = FACTORIAL(N);
+P0=RESULT;
+}
+
+
+19
+#include<reg51.h>
+unsigned int square_lookup_table[] = {0, 1, 4, 9, 16, 25, 36, 49, 64, 81,100};
+void main()
+{
+unsigned char n = 5; 
+square_lookup_table[n];
+P0=square;
+}
+
+20)
+#INCLUDE <REG51.H> 
+ void main ()
+{
+UNSIGNED CHAR NUM1, NUM2, I, COUNT_ONES = 0, COUNT_ZEROS = 0;
+
+num1 = 0x23;
+num2 = 0x23;
+for(i = 0; i < 8; i++)
+{
+if((num1 & (1 << i)) != 0)
+{
+count_ones++;
+}
+else
+{
+count_zeros++;
+}
+if((num2 & (1 << i)) != 0)
+{
+count_ones++;
+} else
+{
+count_zeros++;
+}
+}
+while(1)
+{
+}
+}
+
+
+21)sine wave
+#include<reg51.h>
 void main(void)
 {
 unsigned char
@@ -304,24 +409,35 @@ x1b,0x12,0x0a,
 unsigned char a;
 while(1)
 {
-for(a=0x00;a&lt;0x34;a++)
+for(a=0x00;a<0x34;a++)
 {
 P0=wave_value[a];
-}}}</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program21')">Copy Code</button>
-            </div>
-        </div>
-        
-        <!-- Program 22 -->
-        <div class="program-card">
-            <div class="program-header" onclick="toggleProgram(this)">
-                <h3>22. Stepper Motor Control</h3>
-                <span>+</span>
-            </div>
-            <div class="program-content">
-                <p>Controls a stepper motor in anticlockwise direction</p>
-                <pre id="program22">
-#include&lt;reg51.h&gt;
+}}}
+
+21 square wave
+#include<reg51.h>
+void delay(unsigned int);
+void main(void)
+{
+while(1)
+{
+P0=0x00;
+delay(10);
+P0=0xff;
+delay(10);
+}}
+void delay(unsigned int itime)
+{
+unsigned int i,j;
+for(i=0;i<itime;i++)
+for(j=0;j<25;j++);
+}
+
+
+
+
+22)
+#include<reg51.h>
 #define phasea 0x07
 #define phaseb 0x0b
 #define phasec 0x0d
@@ -329,78 +445,50 @@ P0=wave_value[a];
 void anticlockwise(void);
 void delay(void);
 int i;
-void main ()
-{
-while(1)
-{
-anticlockwise();
-}}
-void anticlockwise(void)
-{
-P0 = phasea;
-delay();
-delay();
-P0 = phaseb;
-delay();
-delay();
-P0 = phasec;
-delay();
-delay();
-P0 = phased;
-delay();
-delay();
+void main () {
+  while(1) {
+    anticlockwise();
+  }
 }
-void delay(void)
-{
-unsigned int i;
-for(i=0;i&lt;=4000;i++);
-}</pre>
-                <button class="copy-btn" onclick="copyToClipboard('program22')">Copy Code</button>
-            </div>
-        </div>
-    </div>
-    
-    <footer>
-        <p>&copy; 2023 Microcontroller Program Repository | Educational Use Only</p>
-    </footer>
-    
-    <script>
-        function toggleProgram(header) {
-            const content = header.nextElementSibling;
-            const icon = header.querySelector('span');
-            
-            if (content.style.display === 'block') {
-                content.style.display = 'none';
-                icon.textContent = '+';
-            } else {
-                content.style.display = 'block';
-                icon.textContent = '-';
-            }
-        }
-        
-        function copyToClipboard(id) {
-            const code = document.getElementById(id).textContent;
-            navigator.clipboard.writeText(code).then(() => {
-                alert('Code copied to clipboard!');
-            });
-        }
-        
-        // Simple search functionality
-        document.querySelector('.search-box').addEventListener('input', function(e) {
-            const searchTerm = e.target.value.toLowerCase();
-            const cards = document.querySelectorAll('.program-card');
-            
-            cards.forEach(card => {
-                const title = card.querySelector('h3').textContent.toLowerCase();
-                const description = card.querySelector('p') ? card.querySelector('p').textContent.toLowerCase() : '';
-                
-                if (title.includes(searchTerm) || description.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    </script>
+void anticlockwise(void) {
+  P0 = phasea; delay(); delay();
+  P0 = phaseb; delay(); delay();
+  P0 = phasec; delay(); delay();
+  P0 = phased; delay(); delay();
+}
+void delay(void) {
+  unsigned int i;
+  for(i=0;i<=4000;i++);
+}
+    `.trim().split(/\n(?=\d+\))/);
+
+    const container = document.getElementById('programs');
+
+    programs.forEach(p => {
+      const div = document.createElement('div');
+      div.className = 'program';
+
+      const pre = document.createElement('pre');
+      pre.textContent = p.trim();
+      div.appendChild(pre);
+
+      const btn = document.createElement('button');
+      btn.textContent = 'Copy';
+      btn.className = 'copy';
+      btn.onclick = () => navigator.clipboard.writeText(pre.textContent);
+      div.appendChild(btn);
+
+      container.appendChild(div);
+    });
+
+    document.getElementById('search').addEventListener('input', function() {
+      const value = this.value.toLowerCase();
+      const divs = document.querySelectorAll('.program');
+      divs.forEach(div => {
+        const text = div.textContent.toLowerCase();
+        div.style.display = text.includes(value) ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
